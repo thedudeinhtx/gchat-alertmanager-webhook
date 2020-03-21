@@ -58,7 +58,7 @@ def send_to_chat(data):
             message = alert['annotations']['message']
         status = alert['status']
         cluster = alert['labels']['cluster']
-        msg = "*{}*: {} on {}".format(status, message, cluster)
+        msg = "*{}*: {} on {}\n".format(status.upper(), message, cluster)
         app.logger.warn("omg: " + msg)
         chat_message = {
             'text': msg
@@ -71,6 +71,7 @@ def send_to_chat(data):
             headers=headers,
             body=dumps(chat_message),
         )
+        app.logger.warn(response)
     
 if __name__ == "__main__":
     app.run()
